@@ -12,7 +12,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                 delimiter_count = text.count(delimiter)
 
                 # Check for unclosed delimiters
-                if delimiter.count % 2 != 0:
+                if delimiter_count % 2 != 0:
                     raise ValueError(f"Invalid markdown: Unclosed delimiter {delimiter}")
                 
                 # Split and create new nodes
