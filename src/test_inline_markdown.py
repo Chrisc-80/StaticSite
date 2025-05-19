@@ -127,9 +127,9 @@ class TestSplitNodesDelimiter(unittest.TestCase):
         )
 
     def test_text_to_textnode(self):
-		result = text_to_textnodes(
-			"This is **text** with an _italic_ word and a `code block`"
-			"and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        result = text_to_textnodes(
+		"This is **text** with an _italic_ word and a `code block`"
+		"and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
 		)
 		expected = [
     	TextNode("This is ", TextType.TEXT),
