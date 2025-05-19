@@ -1,6 +1,6 @@
 from enum import Enum
 from htmlnode import LeafNode
-from inline_markdown import split_nodes_delimiter, split_nodes_image, split_nodes_link
+
 class TextType(Enum):
 	TEXT = 'text'
 	BOLD = 'bold'
@@ -41,14 +41,6 @@ def text_node_to_html_node(text_node):
 	else:
 		raise Exception("TextNode none of those types")
 
-def text_to_textnodes(text):
-	
-	list_of_nodes = [TextNode(text, TextType.TEXT)]
-	list_of_nodes_split_text = split_nodes_delimiter(list_of_nodes)
-	list_of_nodes_split_image = split_nodes_image(list_of_nodes_split_text)
-	list_of_nodes_split_link = split_nodes_link(list_of_nodes_split_image)
-	
-	return list_of_nodes_split_link
 
 
 	
