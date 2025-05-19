@@ -131,7 +131,7 @@ class TestSplitNodesDelimiter(unittest.TestCase):
 		"This is **text** with an _italic_ word and a `code block`"
 		"and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
 		)
-		expected = [
+        expected = [
     	TextNode("This is ", TextType.TEXT),
     	TextNode("text", TextType.BOLD),
     	TextNode(" with an ", TextType.TEXT),
@@ -142,8 +142,8 @@ class TestSplitNodesDelimiter(unittest.TestCase):
     	TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),
     	TextNode(" and a ", TextType.TEXT),
     	TextNode("link", TextType.LINK, "https://boot.dev"),
-		]
-		self.assertEqual(result, expected)
+        ]
+        self.assertEqual(result, expected)
 
 if __name__ == "__main__":
     unittest.main()
