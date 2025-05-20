@@ -82,20 +82,20 @@ def heading_to_html_node(block):
 
 def code_to_html_node(block):
     # Remove the ``` from the beginning and end
-    # This assumes the first line is just ``` and the last line is just ```
     lines = block.split("\n")
-    if len(lines) >= 3:  # At minimum we need opening ```, content, closing ```
+    # Skip the first and last line (the triple backticks)
+    if len(lines) >= 3:
         code_content = "\n".join(lines[1:-1])
     else:
         code_content = ""
     
-    # For code blocks, don't process inline markdown
-    # Instead, create a text node directly
+    # Create a text node directly - no inline markdown processing
     text_node = TextNode(code_content, "text")
     code_node = text_node_to_html_node(text_node)
     
-    # Wrap in a pre tag
-    return HTMLNode("pre", None, None, [HTMLNode("code", None, None, [code_node])])
+    # Create the pre and code tags structure
+    code_html_node = HTMLNode("code", None, None, [code_node])
+    return HTMLNode("pre", None, None, [code_html_node])
 
 def quote_to_html_node(block):
     # Remove the > prefix from each line
