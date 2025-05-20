@@ -1,6 +1,7 @@
 from enum import Enum
 from htmlnode import HTMLNode, LeafNode, ParentNode
 from textnode import TextNode, text_node_to_html_node
+from inline_markdown import text_to_textnodes
 
 class BlockType(Enum):
     PARAGRAPH = "paragraph"
