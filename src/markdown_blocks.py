@@ -157,31 +157,33 @@ def ordered_list_to_html_node(block):
     return HTMLNode("ol", None, None, list_items)
 
 def markdown_to_html_node(markdown):
-    blocks = markdown_to_blocks(markdown)
     # Create a parent div node
-    parent_node = HTMLNode("div", None, None, [])
+    parent_node = HTMLNode("div", None, [])
     
+    # Split markdown into blocks
+    blocks = markdown_to_blocks(markdown)
+    
+    # Process each block
     for block in blocks:
+        # Determine block type
         block_type = block_to_block_type(block)
         
-        # Convert the block to an HTMLNode based on its type
-        if block_type == "paragraph":
-            block_node = paragraph_to_html_node(block)
-        elif block_type == "heading":
-            block_node = heading_to_html_node(block)
-        elif block_type == "code":
+        # Process based on block type
+        if block_type == BlockType.CODE:
             block_node = code_to_html_node(block)
-        elif block_type == "quote":
+        elif block_type == BlockType.HEADING:
+            block_node = heading_to_html_node(block)
+        elif block_type == BlockType.QUOTE:
             block_node = quote_to_html_node(block)
-        elif block_type == "unordered_list":
+        elif block_type == BlockType.UNORDERED_LIST:
             block_node = unordered_list_to_html_node(block)
-        elif block_type == "ordered_list":
+        elif block_type == BlockType.ORDERED_LIST:
             block_node = ordered_list_to_html_node(block)
-        else:
-            # Default to paragraph if type is unknown
+        else:  # Default to paragraph
             block_node = paragraph_to_html_node(block)
         
-        # Add the block node as a child to the parent node
-        parent_node.children.append(block_node)
+        # Add the block node to the parent
+        if block_node:  # Check if block_node is not None
+            parent_node.children.append(block_node)
     
     return parent_node
