@@ -66,7 +66,7 @@ This is the same paragraph on a new line
         blocks = block_to_block_type(md)
         self.assertEqual(blocks, BlockType.UNORDERED_LIST)
 
-         def test_block_to_block_type_unordered_list(self):
+    def test_block_to_block_type_unordered_list(self):
         md = "- This is unordered list line one\n- This is unordered list line two\n- This is unordered list line three"
         blocks = block_to_block_type(md)
         self.assertEqual(blocks, BlockType.UNORDERED_LIST)
