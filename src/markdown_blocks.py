@@ -175,17 +175,17 @@ def markdown_to_html_node(markdown):
         block_type = block_to_block_type(block)
         
         # Convert the block to an HTMLNode based on its type
-        if block_type == "paragraph":
+        if block_type == BlockType.PARAGRAPH:
             block_node = paragraph_to_html_node(block)
-        elif block_type == "heading":
+        elif block_type == BlockType.HEADING:
             block_node = heading_to_html_node(block)
-        elif block_type == "code":
+        elif block_type == BlockType.CODE:
             block_node = code_to_html_node(block)
-        elif block_type == "quote":
+        elif block_type == BlockType.QUOTE:
             block_node = quote_to_html_node(block)
-        elif block_type == "unordered_list":
+        elif block_type == BlockType.ULIST:
             block_node = unordered_list_to_html_node(block)
-        elif block_type == "ordered_list":
+        elif block_type == BlockType.OLIST:
             block_node = ordered_list_to_html_node(block)
         else:
             # Default to paragraph if type is unknown
