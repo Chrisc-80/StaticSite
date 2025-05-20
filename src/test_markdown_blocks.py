@@ -1,5 +1,5 @@
 import unittest
-import markdown_blocks
+from markdown_blocks import BlockType, markdown_to_blocks, block_to_block_type
 
 
 class TestMarkdownToHTML(unittest.TestCase):
