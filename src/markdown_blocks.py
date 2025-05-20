@@ -1,10 +1,7 @@
 from enum import Enum
 from textnode import text_node_to_html_node
 from htmlnode import HTMLNode, LeafNode, ParentNode
-from inline_markdown import (
-    split_nodes_delimiter, extract_markdown_images, split_nodes_image,
-    split_nodes_link, extract_markdown_links, text_to_textnodes
-)
+from inline_markdown import TextNode, TextType
 
 class BlockType(Enum):
 	PARAGRAPH = 'paragraph'
@@ -79,11 +76,13 @@ def code_to_html_node(block):
     
     # For code blocks, don't process inline markdown
     # Instead, create a text node directly
-    text_node = TextNode(code_content, "text")
-    code_node = text_node_to_html_node(text_node)
+    text_node = TextNode(code_content, TextType.TEXT)
+    code_node = HTMLNode("code", None, None, [TextNode(code_content, TextType.TEXT)])
+
     
     # Wrap in a pre tag
-    return HTMLNode("pre", None, None, [HTMLNode("code", None, None, [code_node])])
+    return HTMLNode("pre", None, None, [code_node])
+
 
 def quote_to_html_node(block):
     # Remove the > prefix from each line
