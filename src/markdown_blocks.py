@@ -28,8 +28,8 @@ def block_to_block_type(block):
 
     if block.startswith(("# ", "## ", "### ", "#### ", "##### ", "###### ")):
         return BlockType.HEADING
-    if len(lines) > 1 and lines[0].startswith("```") and lines[-1].startswith("```"):
-        return BlockType.CODE
+    if len(lines) > 1 and lines[0].startswith("```") and (lines[-1] == "```" or lines[-1].startswith("```")):
+    return BlockType.CODE
     if block.startswith(">"):
         for line in lines:
             if not line.startswith(">"):
@@ -174,7 +174,10 @@ def markdown_to_html_node(markdown):
     parent_node = HTMLNode("div", None, None, [])
     
     for block in blocks:
+        # Debug output
+        print(f"Block: '{block}'")
         block_type = block_to_block_type(block)
+        print(f"Block type: {block_type}")
         
         # Convert the block to an HTMLNode based on its type
         if block_type == BlockType.PARAGRAPH:
