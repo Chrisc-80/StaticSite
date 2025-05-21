@@ -88,7 +88,9 @@ def code_to_html_node(block):
         code_content = "\n".join(lines[1:-1])
     else:
         code_content = ""
+    print(f"Code content: '{code_content}'")
     
+    text_node = Text
     # Create a text node directly - no inline markdown processing
     text_node = TextNode(code_content, TextType.TEXT)
     code_node = text_node_to_html_node(text_node)
