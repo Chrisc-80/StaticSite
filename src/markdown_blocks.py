@@ -1,6 +1,6 @@
 from enum import Enum
 from htmlnode import HTMLNode, LeafNode, ParentNode
-from textnode import TextNode, text_node_to_html_node
+from textnode import TextNode, TextType, text_node_to_html_node
 from inline_markdown import text_to_textnodes, split_nodes_delimiter, split_nodes_image, split_nodes_link
 
 class BlockType(Enum):
@@ -90,7 +90,7 @@ def code_to_html_node(block):
         code_content = ""
     
     # Create a text node directly - no inline markdown processing
-    text_node = TextNode(code_content, "text")
+    text_node = TextNode(code_content, TextType.TEXT)
     code_node = text_node_to_html_node(text_node)
     
     # Create the pre and code tags structure
