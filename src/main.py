@@ -1,31 +1,47 @@
-import os, shutil
-from textnode import TextNode, TextType
+import os
+import shutil
 
-def copy_static(source_dir, dest_dir):
+from gencontent import generate_page
 
-	# del public if it exist
-	if os.path.exists(dest_dir):
-		shutil.rmtree(dest_dir)
-		
+dir_path_static = "./static"
+dir_path_public = "./public"
+dir_path_content = "./content"
+template_path = "./template.html"
+
+def copy_files_recursive(dir_path_static, dir_path_public):
+
+	if not os.path.exists(dir_path_public)
 	# create public
-	os.mkdir(dest_dir)
-	
+	os.mkdir(dir_path_public)
+
 	#copy static to public
-	items = os.listdir(source_dir)
+	items = os.listdir(dir_path_static)
 	for item in items:
-		item_path = os.path.join(source_dir, item)
-		dest_path = os.path.join(dest_dir, item)
+		item_path = os.path.join(dir_path_static, item)
+		dest_path = os.path.join(dir_path_public, item)
 		if os.path.isfile(item_path):
 			shutil.copy(item_path, dest_path)
 			
 		else:
 			os.mkdir(dest_path)
-			copy_static(item_path, dest_path)
-		print(item_path, dest_path)
+			copy_files_recursive(item_path, dest_path)
 
 def main():
-    copy_static("static", "public")
+
+	# del public if it exist
+	print("Deleting public directory...")
+    if os.path.exists(dir_path_public):
+        shutil.rmtree(dir_path_public)
 	
+	print("Copying static files to public directory...")
+	copy_files_recursive(dir_path_static, dir_path_public)
+
+	print("Generating page...")
+	generate_page(
+		os.path.join(dir_path_content, "index.md"),
+		template_path,
+		os.path.join(dir_path_public, "index.html"),
+	)
 
 
 main()
