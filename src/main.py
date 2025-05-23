@@ -10,9 +10,9 @@ template_path = "./template.html"
 
 def copy_files_recursive(dir_path_static, dir_path_public):
 
-	if not os.path.exists(dir_path_public)
-	# create public
-	os.mkdir(dir_path_public)
+	if not os.path.exists(dir_path_public):
+		# create public
+		os.mkdir(dir_path_public)
 
 	#copy static to public
 	items = os.listdir(dir_path_static)
